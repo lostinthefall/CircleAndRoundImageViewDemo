@@ -1,8 +1,9 @@
-package com.atozmak.circleandroundimageviewdemo;
+package com.atozmak.circleandroundimageviewdemo.utils;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+
+import com.atozmak.circleandroundimageviewdemo.MainActivity;
 
 import java.lang.ref.WeakReference;
 

@@ -2,7 +2,9 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <!--要用兼容库方式写啊-->
+        <item name="actionBarStyle">@style/TransMyTheme</item>
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -11,5 +13,11 @@
     <style name="EntryTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/liuli</item>
     </style>
+
+    <!--要用兼容库方式写啊-->
+    <style name="TransMyTheme" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/colorTrans</item>
+    </style>
+
 
 </resources>
