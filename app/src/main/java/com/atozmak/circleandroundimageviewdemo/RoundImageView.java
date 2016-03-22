@@ -21,37 +21,30 @@ import android.view.View;
 import android.widget.ImageView;
 
 /**
- * Created by Mak on 2016/3/21.
+ *
  */
 public class RoundImageView extends ImageView {
 
     private int type;
     private static final int TYPE_CIRCLE = 0;
-    //椭圆
     private static final int TYPE_OVAL = 1;
-
     private static final int OVAL_DEFAULT_RADIUS = 10;
-
     /**
      * 圆角大小
      */
     private int mOvalRadius;
-
     private Paint mBitmapPaint;
-
     /**
      * 圆角半径
      */
     private int mRadius;
-
+    /**
+     * 对bitmap进行平移、旋转、缩放、倾斜
+     */
     private Matrix mMatrix;
-
     private BitmapShader mBitmapShader;
-
     private int mWidth;
-
     private RectF mOvalRect;
-
     private static final String STATE_INSTANCE = "state_instance";
     private static final String STATE_TYPE = "state_type";
     private static final String STATE_BORDER_RADIUS = "state_border_radius";
@@ -161,6 +154,9 @@ public class RoundImageView extends ImageView {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
             return bitmapDrawable.getBitmap();
         }
+        /**
+         * getIntrinsicWidth() : Return the intrinsic width of the underlying drawable object.
+         */
         int w = drawable.getIntrinsicWidth();
         int h = drawable.getIntrinsicHeight();
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);

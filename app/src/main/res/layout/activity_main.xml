@@ -47,7 +47,8 @@
             android:layout_height="260dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:src="@drawable/zoro"
+            android:src="@drawable/lufi"
+
             appmak:ovalRadius="40dp"
             appmak:type="oval" />
     </LinearLayout>

@@ -7,12 +7,12 @@ import android.os.Message;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by Mak on 2016/3/21.
+ *
  */
 
 public class HandleEntryTheme extends Handler {
 
-    public static final int WAIT = 500;
+    public static final int WAIT = 300;
     private final WeakReference<MainActivity> weakReference;
 
     public HandleEntryTheme(MainActivity mainActivity) {
