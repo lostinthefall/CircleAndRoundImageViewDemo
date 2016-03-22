@@ -67,58 +67,58 @@ public class ClockView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        mWidth = getMeasuredWidth();
-        mHeight = getMeasuredHeight();
+        mWidth = getWidth();
+        mHeight = getHeight();
 
         Log.v(TAG, "mWidth:" + mWidth);
         Log.v(TAG, "mHeight:" + mHeight);
 
-        canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2, paintCircle);
+        canvas.drawCircle(mWidth / 2, mHeight / 2, mWidth / 2 - 10, paintCircle);
 
         canvas.drawPoint(mWidth / 2, mHeight / 2, paintPoint);
 
+        canvas.rotate(180, mWidth / 2, mHeight / 2);
+
         for (int i = 0; i < 24; i++) {
             if (i == 0 || i == 6 || i == 12 || i == 18) {
-                paintDegree.setStrokeWidth(5);
-                paintDegree.setTextSize(30);
+                paintDegree.setStrokeWidth(10);
+                paintDegree.setTextSize(60);
                 canvas.drawLine(
                         mWidth / 2,
-                        //?
-                        mHeight / 2 - mWidth / 2,
+                        10,
                         mWidth / 2,
-                        mHeight / 2 - mWidth / 2 + 60,
+                        90,
                         paintDegree);
                 String degree = String.valueOf(i);
                 canvas.drawText(
                         degree,
                         mWidth / 2 - paintDegree.measureText(degree) / 2,
-                        mHeight / 2 - mWidth / 2 + 90,
+                        160,
                         paintDegree
                 );
             } else {
-                paintDegree.setStrokeWidth(3);
-                paintDegree.setTextSize(15);
+                paintDegree.setStrokeWidth(5);
+                paintDegree.setTextSize(40);
                 canvas.drawLine(
                         mWidth / 2,
-                        mHeight / 2 - mWidth / 2,
+                        10,
                         mWidth / 2,
-                        mHeight / 2 - mWidth / 2 + 30,
+                        60,
                         paintDegree
                 );
                 String degree = String.valueOf(i);
                 canvas.drawText(
                         degree,
                         mWidth / 2 - paintDegree.measureText(degree) / 2,
-                        mHeight / 2 - mWidth / 2 + 60,
+                        100,
                         paintDegree
                 );
-                canvas.rotate(360 / 24, mWidth / 2, mHeight / 2);
             }
+            canvas.rotate(360 / 24, mWidth / 2, mHeight / 2);
         }
         canvas.save();
         canvas.translate(mWidth / 2, mHeight / 2);
         canvas.drawLine(0, 0, 100, 100, paintHour);
         canvas.drawLine(0, 0, 100, 200, paintMin);
-        canvas.restore();
     }
 }
