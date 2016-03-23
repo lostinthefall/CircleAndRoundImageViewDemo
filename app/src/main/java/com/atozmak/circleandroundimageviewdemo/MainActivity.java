@@ -1,8 +1,11 @@
 package com.atozmak.circleandroundimageviewdemo;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.atozmak.circleandroundimageviewdemo.utils.HandleEntryTheme;
 
@@ -11,6 +14,7 @@ import com.atozmak.circleandroundimageviewdemo.utils.HandleEntryTheme;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private TabHost tabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +26,20 @@ public class MainActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        init();
+    }
+
+    private void init() {
+        tabHost = (TabHost) findViewById(R.id.tabHost);
+        tabHost.setup();
+        tabHost.addTab(tabHost.newTabSpec("circleImage").setIndicator("圆形").setContent(R.id.firstTab));
+        tabHost.addTab(tabHost.newTabSpec("scroll").setIndicator("滑动").setContent(R.id.secondTab));
+
+        for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+            TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(getResources().getColor(R.color.white));
+        }
+
+        tabHost.setCurrentTab(1);
     }
 }
