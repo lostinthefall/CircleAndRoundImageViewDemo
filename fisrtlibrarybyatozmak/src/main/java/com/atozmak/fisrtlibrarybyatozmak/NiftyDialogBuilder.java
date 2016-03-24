@@ -280,7 +280,7 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
 
     public NiftyDialogBuilder isCancelableOnTouhOutside(boolean cancelable) {
         this.isCancelable = cancelable;
-        this.setCancelableOnTouchOutside(cancelable);
+        this.setCanceledOnTouchOutside(cancelable);
         return this;
     }
 
