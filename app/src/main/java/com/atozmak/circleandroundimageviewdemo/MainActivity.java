@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         tabHost.setup();
         tabHost.addTab(tabHost.newTabSpec("circleImage").setIndicator("圆形").setContent(R.id.firstTab));
         tabHost.addTab(tabHost.newTabSpec("scroll").setIndicator("滑动").setContent(R.id.secondTab));
+        tabHost.addTab(tabHost.newTabSpec("dialog").setIndicator("自定义dialog").setContent(R.id.thirdTab));
+        tabHost.addTab(tabHost.newTabSpec("starsView").setIndicator("卫星菜单").setContent(R.id.forthTab));
 
         for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
             TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);

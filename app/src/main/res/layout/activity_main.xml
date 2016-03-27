@@ -34,6 +34,14 @@
                     android:id="@+id/secondTab"
                     layout="@layout/second_tab" />
 
+                <include
+                    android:id="@+id/thirdTab"
+                    layout="@layout/third_tab" />
+
+                <include
+                    android:id="@+id/forthTab"
+                    layout="@layout/stars_menu_right_bottom" />
+
 
             </FrameLayout>
         </LinearLayout>
