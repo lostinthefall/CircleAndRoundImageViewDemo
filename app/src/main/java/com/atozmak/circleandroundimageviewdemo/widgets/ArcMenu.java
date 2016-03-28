@@ -35,7 +35,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
      */
     private Status mCurrentStatus = Status.CLOSE;
 
-    private View mCButtom;
+    private View mCenterButton;
 
     private OnMenuItemClickListener mMenuItemClickListener;
 
@@ -96,21 +96,26 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
     // 是[系统]根据[开发者]在[xml文件]中设置的
     // [宽高值（包括match_parent,wrap_content）]生成的[合成值]
     //是specMode和size的合成值
-    //至于super.onMeasure为什么在那，不懂。。。
+    //至于super.onMeasure为什么在那，不懂。。。（看下面）
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
+        //直接调用ViewGroup中给我们提供好的measureChildren方法、
+        //用下面这个方法就直接不用for循环了
+        //measureChildren(widthMeasureSpec, heightMeasureSpec);
+        //measureChildren 和 measureChild 不同。
         int count = getChildCount();
         for (int i = 0; i < count; i++) {
             measureChild(getChildAt(i), widthMeasureSpec, heightMeasureSpec);
         }
-        // super.onMeasure(widthMeasureSpec, heightMeasureSpec)写在最后是因为
+        // super.onMeasure(widthMeasureSpec, heightMeasureSpec)写在最后就
         //不用设置setMeasuredDimension，直接获得父类提供的默认值
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        //@param changed This is a new size or position for this view
         if (changed) {
             layoutCButton();
             int count = getChildCount();
@@ -361,14 +366,15 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
     }
 
     private void layoutCButton() {
-        mCButtom = getChildAt(0);
-        mCButtom.setOnClickListener(this);
+        mCenterButton = getChildAt(0);
+        mCenterButton.setOnClickListener(this);
 
+        //l,t只是一个未经使用的原始值，都是表示一个长度值
         int l = 0;
         int t = 0;
 
-        int width = mCButtom.getMeasuredWidth();
-        int height = mCButtom.getMeasuredHeight();
+        int width = mCenterButton.getMeasuredWidth();
+        int height = mCenterButton.getMeasuredHeight();
 
         switch (mPosition) {
             case LEFT_TOP:
@@ -388,7 +394,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 t = getMeasuredHeight() - height;
                 break;
         }
-        mCButtom.layout(l, t, l + width, t + width);
+        mCenterButton.layout(l, t, l + width, t + width);
     }
 
     public Status isOpen() {
