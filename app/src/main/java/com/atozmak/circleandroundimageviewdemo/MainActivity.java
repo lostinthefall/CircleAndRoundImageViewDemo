@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity  {
         tabHost.addTab(tabHost.newTabSpec("scroll").setIndicator("滑动").setContent(R.id.secondTab));
         tabHost.addTab(tabHost.newTabSpec("dialog").setIndicator("自定义dialog").setContent(R.id.thirdTab));
         tabHost.addTab(tabHost.newTabSpec("starsView").setIndicator("卫星菜单").setContent(R.id.forthTab));
+        tabHost.addTab(tabHost.newTabSpec("SlidingView").setIndicator("侧滑菜单").setContent(R.id.fifthTab));
 
         for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
             TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             tv.setTextColor(getResources().getColor(R.color.white));
         }
 
-        tabHost.setCurrentTab(3);
+        tabHost.setCurrentTab(4);
     }
 
 
