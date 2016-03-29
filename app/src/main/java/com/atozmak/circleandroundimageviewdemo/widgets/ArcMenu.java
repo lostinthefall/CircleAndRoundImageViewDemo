@@ -113,6 +113,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    //viewGroup中onLayout的作用是每个子view使用layout方法来确定自己的位置。
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         //@param changed This is a new size or position for this view
@@ -123,40 +124,60 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 View child = getChildAt(i + 1);
                 child.setVisibility(View.GONE);
 
-                //cl: 其中一个子卫星菜单的x轴距离
-                //ct：其中一个子卫星菜单的y轴距离
-                int cl = (int) (mRadius * Math.sin(Math.PI / 2 / (count - 2) * i));
-                int ct = (int) (mRadius * Math.cos(Math.PI / 2 / (count - 2) * i));
+                /**
+                 * 现在的情况是在xml文件中排第一位的是Music，最后的是People，
+                 * 显示出来是，在左上左下右上右下四个方位，Music都是贴着左右两边，
+                 * 为什么会这样？
+                 * 因为系统是根据layout方法中开发者设定的位置来确定位置的。
+                 */
 
+                //子view的位置与centerButton的位置没有关系
+
+                //childRelativeWidth : 其中一个子卫星菜单的x轴距离。
+                //childRelativeHeight ：其中一个子卫星菜单的y轴距离。
+                int childRelativeWidth = (int) (mRadius * Math.sin(Math.PI / 2 / (count - 2) * i));
+                int childRelativeHeight = (int) (mRadius * Math.cos(Math.PI / 2 / (count - 2) * i));
+
+                //子view的 宽 和 高 。
                 int cWidth = child.getMeasuredWidth();
                 int cHeight = child.getMeasuredHeight();
 
-                //如果菜单位置在左下，右下
+                //如果菜单位置在左下，右下，
                 if (mPosition == Position.LEFT_BOTTOM || mPosition == Position.RIGHT_BOTTOM) {
-                    ct = getMeasuredHeight() - cHeight - ct;
+                    childRelativeHeight = getMeasuredHeight() - cHeight - childRelativeHeight;
                 }
+                //如果菜单位置在左上，右上，高度一样，宽度不一样
                 if (mPosition == Position.RIGHT_TOP || mPosition == Position.RIGHT_BOTTOM) {
-                    cl = getMeasuredWidth() - cWidth - cl;
+                    childRelativeWidth = getMeasuredWidth() - cWidth - childRelativeWidth;
                 }
-                child.layout(cl, ct, cl + cWidth, ct + cHeight);
+
+                //以上方法都是为了确定每个子view的四个值而创在出来的helper。
+                child.layout(
+                        childRelativeWidth,
+                        childRelativeHeight,
+                        childRelativeWidth + cWidth,
+                        childRelativeHeight + cHeight
+                );
             }
         }
     }
 
-
-    //------------------------------------------------------
     //------------------------------------------------------
 
     @Override
     public void onClick(View v) {
-        rotateCBottom(v, 0f, 360f, 300);
-        toggleMenu(300);
+        rotateCBottom(v, 0f, 360f, 1000);
+        toggleMenu(500);
     }
 
+    //参考　http://theron.blog.51cto.com/2383825/656385
     private void rotateCBottom(View v, float start, float end, int duration) {
         RotateAnimation animation = new RotateAnimation(
                 start,
                 end,
+                //转的圆心的X坐标是相对谁为参照物的，
+                // 这里有3种情况：RELATIVE_TO_SELF，RELATIVE_TO_PARENT，ABSOLUTE，
+                // 分别是相对自己，相对父控件，绝对位置
                 Animation.RELATIVE_TO_SELF,
                 0.5f,
                 Animation.RELATIVE_TO_SELF,
@@ -197,6 +218,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 yFlag = -1;
             }
 
+            //true表示set里面的各个动画都用同样的interpolator
             AnimationSet animationSet = new AnimationSet(true);
             TranslateAnimation tranAnim = null;
 
@@ -213,7 +235,8 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
             }
             tranAnim.setFillAfter(true);
             tranAnim.setDuration(duration);
-            tranAnim.setStartOffset((i * 100) / count);
+            tranAnim.setStartOffset(i * 100);
+            // tranAnim.setStartOffset((i * 100) / count);
 
             tranAnim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -224,7 +247,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     if (mCurrentStatus == Status.CLOSE) {
-                        childView.setVisibility(View.GONE);
+                          childView.setVisibility(View.GONE);
                     }
                 }
 
@@ -237,7 +260,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
             //旋转动画
             RotateAnimation rotateAnimation = new RotateAnimation(
                     0,
-                    720,
+                    720 * 2,
                     Animation.RELATIVE_TO_SELF,
                     0.5f,
                     Animation.RELATIVE_TO_SELF,
@@ -262,6 +285,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 }
             });
         }
+        changeStatus();
     }
 
     private void changeStatus() {
@@ -269,7 +293,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
     }
 
     private void menuItemAnim(int pos) {
-        for (int i = 0; i < getChildCount(); i++) {
+        for (int i = 0; i < getChildCount()-1; i++) {
             View childView = getChildAt(i + 1);
             if (i == pos) {
                 childView.startAnimation(scaleBigAnim(300));
