@@ -1,8 +1,7 @@
 package com.atozmak.circleandroundimageviewdemo;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import com.atozmak.circleandroundimageviewdemo.utils.HandleEntryTheme;
 /**
  * 参考自http://blog.csdn.net/lmj623565791/article/details/41967509
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private TabHost tabHost;
 
@@ -44,4 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         tabHost.setCurrentTab(3);
     }
+
+
 }

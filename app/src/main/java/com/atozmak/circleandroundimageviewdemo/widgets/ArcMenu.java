@@ -87,7 +87,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
         setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public void onClick(View v, int pos) {
-                Toast.makeText(v.getContext(), "hihi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "v.getId()=" + v.getId() + ",pos=" + pos, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -209,7 +209,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
             int ct = (int) (mRadius * Math.cos(Math.PI / 2 / (count - 2) * i));
 
             int xFlag = 1;
-            int yFlag = 2;
+            int yFlag = 1;
 
             if (mPosition == Position.LEFT_TOP || mPosition == Position.LEFT_BOTTOM) {
                 xFlag = -1;
@@ -247,7 +247,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     if (mCurrentStatus == Status.CLOSE) {
-                          childView.setVisibility(View.GONE);
+                        childView.setVisibility(View.GONE);
                     }
                 }
 
@@ -278,6 +278,7 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
                 @Override
                 public void onClick(View v) {
                     if (mMenuItemClickListener != null) {
+                        //mainActivity中实现这个接口，重写onClick方法。
                         mMenuItemClickListener.onClick(childView, pos);
                     }
                     menuItemAnim(pos - 1);
@@ -293,11 +294,13 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
     }
 
     private void menuItemAnim(int pos) {
-        for (int i = 0; i < getChildCount()-1; i++) {
+        for (int i = 0; i < getChildCount() - 1; i++) {
             View childView = getChildAt(i + 1);
             if (i == pos) {
+                //被点击的按钮就放大。
                 childView.startAnimation(scaleBigAnim(300));
             } else {
+                //除了被点击的按钮之外，其他的按钮都缩小消失。
                 childView.startAnimation(scaleSmallAnim(300));
             }
             childView.setClickable(false);
