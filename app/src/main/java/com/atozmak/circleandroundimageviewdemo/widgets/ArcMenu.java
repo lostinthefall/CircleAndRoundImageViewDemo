@@ -117,12 +117,14 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         //@param changed This is a new size or position for this view
         if (changed) {
-            layoutCButton();
+            layoutCenterButton();
             int count = getChildCount();
             for (int i = 0; i < count - 1; i++) {
                 View child = getChildAt(i + 1);
                 child.setVisibility(View.GONE);
 
+                //cl: 其中一个子卫星菜单的x轴距离
+                //ct：其中一个子卫星菜单的y轴距离
                 int cl = (int) (mRadius * Math.sin(Math.PI / 2 / (count - 2) * i));
                 int ct = (int) (mRadius * Math.cos(Math.PI / 2 / (count - 2) * i));
 
@@ -365,36 +367,39 @@ public class ArcMenu extends ViewGroup implements View.OnClickListener {
         a.recycle();
     }
 
-    private void layoutCButton() {
+    private void layoutCenterButton() {
         mCenterButton = getChildAt(0);
         mCenterButton.setOnClickListener(this);
 
-        //l,t只是一个未经使用的原始值，都是表示一个长度值
-        int l = 0;
-        int t = 0;
+        //relativeWidth,relativeHeight 只是一个未经使用的原始值，都是表示一个长度值
+        int relativeWidth = 0;
+        int relativeHeight = 0;
 
+        //这是mCenterButton的宽和高。
         int width = mCenterButton.getMeasuredWidth();
         int height = mCenterButton.getMeasuredHeight();
 
         switch (mPosition) {
             case LEFT_TOP:
-                l = 0;
-                t = 0;
+                relativeWidth = 0;
+                relativeHeight = 0;
                 break;
             case LEFT_BOTTOM:
-                l = 0;
-                t = getMeasuredHeight() - height;
+                relativeWidth = 0;
+                //getMeasuredHeight()是viewGroup的高。
+                relativeHeight = getMeasuredHeight() - height;
                 break;
             case RIGHT_TOP:
-                l = getMeasuredWidth() - width;
-                t = 0;
+                //getMeasuredHeight()是viewGroup的宽。
+                relativeWidth = getMeasuredWidth() - width;
+                relativeHeight = 0;
                 break;
             case RIGHT_BOTTOM:
-                l = getMeasuredWidth() - width;
-                t = getMeasuredHeight() - height;
+                relativeWidth = getMeasuredWidth() - width;
+                relativeHeight = getMeasuredHeight() - height;
                 break;
         }
-        mCenterButton.layout(l, t, l + width, t + width);
+        mCenterButton.layout(relativeWidth, relativeHeight, relativeWidth + width, relativeHeight + height);
     }
 
     public Status isOpen() {

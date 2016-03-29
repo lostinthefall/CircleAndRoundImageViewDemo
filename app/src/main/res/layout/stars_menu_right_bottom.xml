@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    atoz:position="right_bottom"
+    atoz:position="right_top"
     atoz:radius="150dp">
 
     <RelativeLayout
