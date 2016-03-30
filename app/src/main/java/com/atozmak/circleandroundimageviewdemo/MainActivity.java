@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity  {
             tv.setTextColor(getResources().getColor(R.color.white));
         }
 
-        tabHost.setCurrentTab(4);
+        tabHost.setCurrentTab(2);
     }
 
 

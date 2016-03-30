@@ -17,10 +17,13 @@ import com.atozmak.fisrtlibrarybyatozmak.effects.SlideTop;
 import com.atozmak.fisrtlibrarybyatozmak.effects.Slit;
 
 /**
- * Created by Mak on 2016/3/24.
+ * 基础知识在[疯狂javaP224]
  */
 public enum Effectstype {
 
+    /**
+     *  step 1 : 列出所有枚举实例 ，并传入参数 。
+     */
     Fadein(FadeIn.class),
     Slideleft(SlideLeft.class),
     Slidetop(SlideTop.class),
@@ -36,12 +39,21 @@ public enum Effectstype {
     Shake(Shake.class),
     Sidefill(SideFall.class);
 
+    /**
+     *  step 2 ：定义一个实例变量 。private修饰。
+     */
     private Class<? extends BaseEffects> effectsCls;
 
+    /**
+     *  step 3 ：创建构造器 。private修饰。
+     */
     private Effectstype(Class<? extends BaseEffects> mClass) {
-        effectsCls = mClass;
+        this.effectsCls = mClass;
     }
 
+    /**
+     *  step 4 ：？
+     */
     public BaseEffects getAnimator() {
         BaseEffects baseEffects = null;
 

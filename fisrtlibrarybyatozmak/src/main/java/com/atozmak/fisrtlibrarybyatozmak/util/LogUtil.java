@@ -1,11 +1,10 @@
-package com.atozmak.circleandroundimageviewdemo.utils;
+package com.atozmak.fisrtlibrarybyatozmak.util;
 
 /**
- * Created by Mak on 2016/3/22.
+ * Created by Mak on 2016/3/30.
  */
 public class LogUtil {
-
-    public static final String PREFIX = "CircleAnd..._";
+    public static final String PREFIX = "firstLib..._";
 
     public static String makeLogTag(String string) {
         return PREFIX + string;

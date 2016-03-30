@@ -1,19 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.atozmak.circleandroundimageviewdemo.widgets.CustomDialog xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-    <Button
-        android:id="@+id/btn1"
+    <com.atozmak.circleandroundimageviewdemo.widgets.CustomDialog
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="btn_test1" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="btn_test2" />
+        <Button
+            android:textColor="@color/colorAccent"
+            android:id="@+id/btnFadeIn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnFadeIn" />
 
-</com.atozmak.circleandroundimageviewdemo.widgets.CustomDialog>
+        <Button
+            android:id="@+id/btnFall"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnFall" />
+
+        <Button
+            android:id="@+id/btnFlipH"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnFlipH" />
+
+        <Button
+            android:id="@+id/btnFlipV"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnFlipV" />
+
+        <Button
+            android:textColor="@color/colorAccent"
+            android:id="@+id/btnNewsPaper"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnNewsPaper" />
+
+        <Button
+            android:id="@+id/btnRotateBottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnRotateBottom" />
+
+        <Button
+            android:id="@+id/btnRotateLeft"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnRotateLeft" />
+
+        <Button
+            android:id="@+id/btnShake"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnShake" />
+
+        <Button
+            android:id="@+id/btnSideFall"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnSideFall" />
+
+        <Button
+            android:id="@+id/btnSlideBottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnSlideBottom" />
+
+        <Button
+            android:textColor="@color/colorAccent"
+            android:id="@+id/btnSlideLeft"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnSlideLeft" />
+
+        <Button
+            android:id="@+id/btnSlideRight"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnSlideRight" />
+
+        <Button
+            android:id="@+id/btnSlideTop"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnSlideTop" />
+
+        <Button
+            android:id="@+id/btnSlit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="btnSlit" />
+
+    </com.atozmak.circleandroundimageviewdemo.widgets.CustomDialog>
+</ScrollView>

@@ -32,7 +32,7 @@ public abstract class BaseEffects {
          *   ViewHelper.setPivotX(view, view.getMeasuredWidth() / 2.0f);
          *   对应的是下面这个啊
          */
-        //中心点
+        //设置中心点
         view.setPivotX(view.getMeasuredWidth() / 2.0f);
         view.setPivotY(view.getMeasuredHeight() / 2.0f);
     }
@@ -44,6 +44,4 @@ public abstract class BaseEffects {
     public void setDuration(long duration) {
         this.mDuration = duration;
     }
-
-
 }
