@@ -8,7 +8,8 @@
         android:id="@+id/idSlidingMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        atozSlindingMenu:rightPadding="200dp">
+        android:background="@drawable/lufi"
+        atozSlindingMenu:rightPadding="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -3,12 +3,10 @@ package com.atozmak.circleandroundimageviewdemo.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -42,13 +40,13 @@ public class SlidingMenu extends HorizontalScrollView {
         this(context, null);
     }
 
-    //未设置自定义属性时，会调用此构造方法。
+    //xml文件中有系统属性，但无自定义属性时，会调用此构造方法。
     public SlidingMenu(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
 
     }
 
-    //当使用了自定义属性时，调用此构造方法。
+    //xml文件中使用了自定义属性时，调用此构造方法。
     public SlidingMenu(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
@@ -204,6 +202,21 @@ public class SlidingMenu extends HorizontalScrollView {
         // 在用户想要滑出menu的一瞬间，menu已经向右移动了mMenuWidth*1的距离。
         // 用户几乎滑动了menu宽度这么长的距离的一瞬间，menu已经向右移动了mMenuWidth*0的距离。
         mMenu.setTranslationX(mMenuWidth * scale);
+        //设置menu的缩放，透明度
+        float leftScale = 1.0f - scale * 0.3f;
+        float leftAlpha = 0.6f + 0.4f * (1 - scale);
+        mMenu.setScaleX(leftScale);
+        mMenu.setScaleY(leftScale);
+        mMenu.setAlpha(leftAlpha);
+
+        //设置content的缩放,中心点和大小。
+        float rightScale = 0.7f + 0.3f * scale;
+        mContent.setPivotX(0);
+        mContent.setPivotY(mContent.getHeight() / 2);
+        mContent.setScaleX(rightScale);
+        mContent.setScaleY(rightScale);
+
+
 
     }
 }
