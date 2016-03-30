@@ -1,14 +1,12 @@
 package com.atozmak.fisrtlibrarybyatozmak;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -61,8 +59,7 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
     //-------------------------------------------------------
 
     public NiftyDialogBuilder(Context context) {
-        super(context);
-        init(context);
+        this(context, 0);
     }
 
     public NiftyDialogBuilder(Context context, int themeResId) {
@@ -86,6 +83,9 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
         mButton1 = (Button) mDialogView.findViewById(R.id.button1);
         mButton2 = (Button) mDialogView.findViewById(R.id.button2);
 
+        /**
+         *  这个方法是关键。。把自定义的view弄成一个dialog。
+         */
         setContentView(mDialogView);
 
         this.setOnShowListener(new OnShowListener() {
@@ -162,6 +162,7 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
 
     private void toggleView(View view, Object obj) {
         if (obj == null) {
+            //如果title没有写内容的话就把这个holder隐藏了。
             view.setVisibility(View.GONE);
         } else {
             view.setVisibility(View.VISIBLE);
@@ -228,6 +229,9 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
         return this;
     }
 
+    /**
+     *  在这里把type传进来。！！！
+     */
     public NiftyDialogBuilder withEffect(Effectstype type) {
         this.type = type;
         return this;
@@ -290,11 +294,14 @@ public class NiftyDialogBuilder extends Dialog implements DialogInterface {
         return this;
     }
 
+    //------------------------------------------------------
+
     @Override
     public void show() {
         super.show();
     }
 
+    //start是开始演示动画，和show没有关系。
     private void start(Effectstype type) {
         BaseEffects animator = type.getAnimator();
         if (mDuration != -1) {

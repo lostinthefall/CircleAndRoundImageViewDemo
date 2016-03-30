@@ -22,7 +22,9 @@ public abstract class BaseEffects {
 
     public void start(View view) {
         reset(view);
+        //１．在setupAnimation中把set组合起来。
         setupAnimation(view);
+        //２．播放动画。
         mAnimatorSet.start();
     }
 
