@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--============================================================-->
+
     <declare-styleable name="ArcMenu">
         <attr name="position" />
         <attr name="radius" />
@@ -15,7 +17,15 @@
 
     <attr name="radius" format="dimension" />
 
+    <!--============================================================-->
 
+    <declare-styleable name="SlidingMenu">
+        <attr name="rightPadding" />
 
+    </declare-styleable>
+
+    <attr name="rightPadding" format="dimension" />
+
+    <!--============================================================-->
 
 </resources>
