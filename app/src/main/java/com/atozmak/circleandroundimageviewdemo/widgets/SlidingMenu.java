@@ -3,6 +3,7 @@ package com.atozmak.circleandroundimageviewdemo.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.atozmak.circleandroundimageviewdemo.R;
+import com.atozmak.circleandroundimageviewdemo.utils.LogUtil;
 
 /**
  * Created by Mak on 2016/3/29.
  */
 public class SlidingMenu extends HorizontalScrollView {
+
+    public static final String TAG = LogUtil.makeLogTag("SlidingMenu");
 
     private LinearLayout mWrapper;
     private ViewGroup mMenu;
@@ -53,6 +57,7 @@ public class SlidingMenu extends HorizontalScrollView {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+
         mScreenWidth = getResources().getDisplayMetrics().widthPixels;
 
 /*        //把dp转为px
@@ -189,12 +194,21 @@ public class SlidingMenu extends HorizontalScrollView {
     }
 
     //添加了之后以下代码之后会使得menu有固定的效果。
+    //只需要判断 l > oldl即为手指向右滑动
+    //l是menu的0点与屏幕左边的距离
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
 
+        //因为l是已经移了mMenuWidth长度了，所以
         //变化 ：1 --> 0
         float scale = l * 1.0f / mMenuWidth;
+        Log.v(TAG,"mMenuWidth="+mMenuWidth);
+        Log.v(TAG,"l="+l+",oldl="+oldl);
+        //              一开始已经 l=930,oldl=0， mMenuWidth=930
+        //       当我手指落下的瞬间 l=911,oldl=930 ， l的值传给了oldl
+        // 当我滑动了一大段距离之后 l=0,oldl=1
+
         // menu这个view是有自己的位置的，就是horizontalView中连着contentView的左边，
         // 按照规定，如果滑动contentView，menu也就会连着被滑出来，
         // 现在想要固定menu的话，就要使得在用户不断滑动的过程中，让menu都移到一个确定的位置，

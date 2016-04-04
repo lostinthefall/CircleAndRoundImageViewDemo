@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
 
+
         <include layout="@layout/clockview" />
 
         <include layout="@layout/circle_image_view" />
